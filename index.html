@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  
+  <title>ICT Lab - MP ICT योजना</title>
+  <style>
+    *{ margin:0; padding:0; box-sizing: border-box; font-family: sans-serif;}
+    body{ background:#fffffffb; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* 🔹 Compact Animated Header with School Name */
+    .main-header {
+      height: 100px; /* Adjusted for better visibility */
+      background: linear-gradient(-45deg, #6a11cb, #2575fc, #6a11cb, #2575fc);
+      background-size: 400% 400%;
+      animation: gradientMove 8s ease infinite;
+      color: white;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Title Styling */
+    .main-header h1 {
+      font-size: 1.3rem; /* Adjusted size */
+      font-weight: 700;
+      margin-bottom: 4px;
+      word-wrap: break-word; /* Word wrapping for smaller screens */
+    }
+
+    /* Sub-title Styling */
+    .main-header h2 {
+      font-size: 0.9rem; /* Adjusted size */
+      font-weight: 500;
+      color: #e0e0ff;
+      margin-bottom: 10px;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .search-box input {
+      padding: 8px 14px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      width: 60%;
+      max-width: 350px;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(255,255,255,0.6);
+      transition: all 0.4s ease;
+    }
+
+    .search-box input:focus {
+      box-shadow: 0 0 20px rgba(255,255,255,0.9);
+    }
+
+    /* 🔹 Navigation Bar */
+    nav {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 6px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    /* ✅ Default "Home" selected */
+    .nav-links a.active {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: 2px solid white;
+    }
+
+    /* Hover underline effect */
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: white;
+      transform: translateX(-50%);
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover::before {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      transform: scale(1.05);
+    }
+
+    /* 🔹 Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: white;
+      min-width: 180px;
+      border-radius: 6px;
+      top: 100%;
+      left: 0;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 10px 14px;
+      display: block;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* 🔹 Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      transition: 0.3s;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        background-color: #0072ff;
+        width: 100%;
+        display: none;
+        padding: 15px 0;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .dropdown-content {
+        position: relative;
+        box-shadow: none;
+      }
+    }
+
+    /* Slider Section */
+  
+    .slider-container {
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: fade 1s;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .icon-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 36px;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .icon-btn:hover {
+      background-color: rgba(255,255,255,0.8);
+      color: #000;
+    }
+
+    .prev {
+      left: 20px;
+    }
+
+    .next {
+      right: 20px;
+    }
+
+    @keyframes fade {
+      from {opacity: 0.5;}
+      to {opacity: 1;}
+    }
+
+    .dots {
+      text-align: center;
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .dot.active-dot {
+      background-color: #fff;
+    }
+
+    /* Video Background */
+    .video-bg{
+      position:relative; 
+      height:300px;
+      overflow:hidden;
+    }
+
+    .video-bg video{
+      width:100%; 
+      height:auto;
+      position:absolute; left:0; top:0;
+    }
+
+    .video-content{
+      position:relative;
+      z-index:1;
+      color:#fff;
+      text-align:center;
+      padding-top:100px;
+    }
+
+    /* Image Gallery */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .gallery-item {
+      width: 300px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.4s;
+    }
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    /* Progress Bars */
+    .progress{
+      background:#ddd; 
+      border-radius:20px;
+      overflow:hidden;
+      width:80%; 
+      margin:10px auto;
+    }
+
+    .progress div{
+      height:20px; 
+      color:#fff; 
+      text-align:center;
+      line-height:20px;
+    }
+
+    .ict{width:90%; background:#4caf50;}
+    .word{width:85%; background:#2196f3;}
+    .excel{width:80%; background:#ff9800;}
+    .ppt{width:75%; background:#e91e63;}
+    .internet{width:70%; background:#9c27b0;}
+
+    /* Feedback Section */
+    .feedback{
+      background:#e3f2fd;
+      padding:30px;
+      margin:20px;
+      border-radius:10px;
+      text-align:center;
+    }
+
+    .feedback button{
+      background:#ff4081;
+      color:#fff;
+      padding:12px 24px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .feedback button:hover{
+      background:#ff1744;
+      transform: scale(1.05);
+    }
+
+    /* Level Button Container */
+    .level-container{
+      background-color: #f1f1f1;
+      padding: 30px;
+      text-align: center;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 10px;
+    }
+
+    .level-container button{
+      background-color: #4caf50;
+      color: white;
+      padding: 15px 40px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .level-container button:hover{
+      background-color: #45a049;
+    }
+
+    /* Footer Styling */
+    footer {
+      background-color: #2618e0;
+      color: #fff;
+      padding: 20px 0;
+      margin-top: 20px;
+      text-align: center;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: slideInFooter 1.5s ease-in-out;
+    }
+
+    footer h4 {
+      margin-top: 0;
+    }
+
+    footer ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    footer ul li {
+      margin: 5px 0;
+      
+    }
+    footer ul li a {
+      margin: 5px 0;
+      color:#f0f2f5;
+       
+    }
+    footer ul li a:hover {
+      
+      color:#e21212;
+       
+    }
+
+    
+    footer .map iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+    
+    /* Scroll to Top Button */
+    .scroll-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .scroll-to-top:hover {
+      transform: scale(1.1);
+    }
+    
+    /* For Card Styling */
+.card {
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+    
+}
+
+.card .icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+/* For Buttons */
+.card .btn {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 15px; /* यह लाइन जोड़ें */
+}
+
+
+/* For Feedback Section */
+.feedback button {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+/* Marquee container style */
+        .marquee-container {
+            width: 100%;
+            background: linear-gradient(45deg, #971e1e, #6029c5); /* Gradient background */
+            color: white;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+
+        /* Marquee content style */
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee-animation 12s linear infinite;
+        }
+
+        /* Marquee animation */
+        @keyframes marquee-animation {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Links style inside marquee */
+        .marquee a {
+            color: #ffffff; /* Initial link color */
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 20px;
+            transition: color 0.10s ease, transform 0.5s ease, background-color 0.3s ease; /* Transition effect */
+        }
+
+        /* Hover effect */
+        .marquee p:hover {
+            color: #ffee00; /* Font color change on hover */
+            background-color: rgba(255, 99, 71, 0.3); /* Background color change on hover */
+            transform: scale(1.2); /* Slight zoom effect */
+            text-decoration: underline;
+        }
+        
+  
+  .search-box {
+  margin: 20px;
+}
+
+.search-box input {
+  padding: 10px;
+  width: 250px;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  
+}
+
+#searchResults p {
+  margin: 10px 0;
+}
+.video_btn
+{
+  
+      background: linear-gradient(to right, #201e1e, #020066);
+      color: white;
+      margin-top: 10px;
+      font-size: 18px;
+
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+}
+
+    .video_btn:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      
+    }
+    .gallery-item {
+      width: 300px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(63, 23, 138, 0.2);
+      transition: 0.4s;
+    }
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+</style>
+<script>
+  document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+    alert("Right Click Not Allowed On This Website");
+  }, false);
+  document.addEventListener("selectstart", function(e){
+    e.preventDefault();
+  }, false);
+  document.addEventListener("copy", function(e){
+    e.preventDefault();
+    alert("Copying is Not Allowed On This Website");
+  }, false);
+  document.addEventListener("keydown", function(e) {
+      if (e.key === "PrintScreen") {
+        alert("Screenshot are not Allowed On This Website");
+        e.preventDefault();
+      }
+  document.addEventListener ("mousedown", function(e)
+   {
+    alert("Copying or other action may be restricted");
+    e.preventDefault();
+  });
+    });
+  </script>
+
+  
+  
+  <style>
+  #google_translate_element {
+    width: 100%;  /* पूरी चौड़ाई */
+    text-align: center;  /* मध्य में स्थित करें */
+    margin: 20px 0;  /* ऊपर और नीचे थोड़ी जगह */
+  }
+
+  @media screen and (max-width: 768px) {
+    #google_translate_element {
+      font-size: 14px;  /* छोटे स्क्रीन पर टेक्स्ट साइज कम करें */
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    #google_translate_element {
+      font-size: 12px;  /* बहुत छोटे स्क्रीन के लिए और भी छोटा टेक्स्ट साइज */
+    }
+  }
+</style>
+  
+  
+  
+  
+    </style>
+</head>
+
+<body>
+
+<!-- 🔹 Header Section with Centered School Name -->
+<div class="main-header">
+    <h1>CM RISE GHSS SABULAL SCHOOL GARHAKOTA, SAGAR DIST</h1>
+   <!--<div class="search-box">
+  <input type="text" id="searchInput" placeholder="साइट में सर्च करें...">
+  <button onclick="searchSite()">सर्च</button>
+</div>
+<div id="searchResults"></div>
+-->
+
+    </div>
+  </div>
+  
+  <!-- 🔹 Navigation Bar -->
+  <nav>
+    <div class="hamburger" id="hamburger">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  
+    <div class="nav-links" id="nav-links">
+      
+        <a href="index.html" class="active">Home</a> <!-- ✅ Default selected -->
+        <a href="mp_ict_yojna.html">MP ICT Lab</a>
+        <a href="ict_intro_activity.html">ICT Lab Introduction Activity</a>
+        
+          <a href="ict_notes.html">ICT Lab Notes</a>
+          <a href="digital_prodictivy_courss.html">Digital Productivity Course</a>
+          <a href="digita_course_project.html">Project School Varshik Patrika</a>
+          <a href="ict_lab_gallery.html">ICT Lab Image Gallery</a>
+          <a href="YouTube_video.html">ICT Lab Video Gallery</a>
+          <a href="Feedback.html">Feedback Form</a>
+          <a href="Message.html">Message</a>
+          <a href="about_author.html">About</a>
+          <div class="dropdown">
+            <a href="mp_ict_lab_syallbus.html">ICT Lab Syllabus <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <a href="syallabus_unit1.html">Unit 1</a>
+              <a href="syallabus_unit2.html">Unit 2</a>
+              <a href="syallabus_unit3.html">Unit 3</a>
+              <a href="syallabus_unit4.html">Unit 4</a>
+              <a href="syallabus_unit5.html">Unit 5</a>
+              <a href="syallabus_unit6.html">Unit 6</a>
+              <a href="syallabus_unit7.html">Unit 7</a>
+              <a href="syallabus_unit8.html">Unit 8</a>
+              </div>
+    </div>
+  </nav>
+  
+  <!-- 🔹 JS for Hamburger Toggle -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+  
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('show');
+    });
+  </script>
+
+
+
+
+
+    
+        
+    </style>
+
+    <!-- Marquee Section -->
+    <div class="marquee-container">
+      
+        <div class="marquee">
+            <!----a href="ict_notes.html">ICT LAB NOTES</a> | 
+            <a href="mp_ict_lab_syallbus.html">ICT LAB SYALLABUS </a> | 
+            
+            <a href="mp_ict_yojna.html">MP ICT LAB</a> | 
+            <a href="digital_prodictivy_courss.html">DIGITAL PRODUCTIVITY COURSE</a>
+            <a href="digita_course_project.html">SCHOOL PATRIKA COURSE PROJECT </a>
+        </div>-->
+        <p>इस वेबसाइट का उद्देश्य छात्रों और शिक्षकों को ICT से जुड़ी महत्वपूर्ण जानकारी देना है। किसी भी त्रुटि के लिए कृपया हमें क्षमा करें।"</p>
+    </div>
+ </div>
+ <!-- Slider Section -->
+
+
+ 
+<div class="slider-container">
+  <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (53).jpg" class="slide active">
+  <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (45).jpg" class="slide">
+  <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (86).jpg" class="slide">
+  
+  <button class="icon-btn prev" onclick="prevSlide()">&#10094;</button>
+  <button class="icon-btn next" onclick="nextSlide()">&#10095;</button>
+
+  <div class="dots">
+    <span class="dot active-dot" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+  </div>
+</div>
+
+<script>
+  var slides = document.getElementsByClassName("slide");
+  var dots = document.getElementsByClassName("dot");
+  var currentIndex = 0;
+
+  function showSlide(index) {
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+      dots[i].classList.remove("active-dot");
+    }
+    slides[index].classList.add("active");
+    dots[index].classList.add("active-dot");
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  function currentSlide(index) {
+    currentIndex = index;
+    showSlide(currentIndex);
+  }
+
+  // Auto Slide
+  setInterval(function(){
+    nextSlide();
+  }, 4000);
+</script>
+
+
+
+
+
+  <!-- ICT Lab Introduction -->
+ 
+
+  <!-- Video Background Section -->
+  <div class="video-bg">
+    <video src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\Bckground_video.mp4" autoplay muted loop></video>
+    <div class="video-content">
+      <h2>Welcome to Our ICT Program</h2>
+      <p>हमारा ICT प्रोग्राम छात्रों को डिजिटल दुनिया के लिए तैयार करता है। यहां, हम बच्चों को कंप्यूटर, इंटरनेट, और साइबर सिक्योरिटी जैसी महत्वपूर्ण स्किल्स सिखाते हैं। Our labs are equipped with the latest technology to help students gain practical experience and build a solid foundation in digital education.</p>
+      <a href="ict_intro_activity.html" class="video_btn" target="_blank">Know More</a>
+    </div>
+  </div>
+
+
+
+
+
+
+<section>
+    <div class="card" style="background: linear-gradient(45deg, #6a11cb, #2575fc);">
+        <div class="icon">
+            <i class="fas fa-school"></i> <!-- Icon for School -->
+        </div>
+        <h3>MP ICT LAB</h3>
+        <p>मध्यप्रदेश सरकार की ICT योजना के तहत राज्यभर के सरकारी स्कूलों में ICT लैब की स्थापना की गई है, जिससे विद्यार्थियों को डिजिटल शिक्षा का अवसर मिल रहा है।</p>
+        <a href="mp_ict_lab_syallbus.html" class="btn">More</a>
+    </div>
+    
+    <div class="card" style="background: linear-gradient(45deg, #ff6a00, #ee0979);">
+        <div class="icon">
+            <i class="fas fa-laptop"></i> <!-- Icon for Laptop -->
+        </div>
+        <h3>ICT लैब गतिविधि</h3>
+        <p>हमारी ICT लैब में कम्प्यूटर शिक्षा, प्रोग्रामिंग, ग्राफिक्स डिज़ाइन और विभिन्न शैक्षिक प्रोजेक्ट्स पर कार्य किया जाता है। यहाँ विद्यार्थियों को व्यावहारिक कौशल सिखाए जाते हैं।</p>
+        <a href="#" class="btn">See More</a>
+    </div>
+
+
+<div class="card" style="background: linear-gradient(45deg, #fccb90, #d57eeb);">
+    <i class="fas fa-book"></i>
+    <h3>ICT नोट्स</h3>
+    <p>Computer Basic और Word Processing के सरल नोट्स उपलब्ध।</p>
+    <a href="ict_notes.html" class="btn">Read Notes</a>
+  </div>
+
+  <div class="card" style="background: linear-gradient(45deg, #fddb92, #d1fdff);">
+    <i class="fas fa-list"></i>
+    <h3>MP ICT सिलेबस</h3>
+    <p>सभी विषयों का यूनिट वाइज सिलेबस एक ही स्थान पर।</p>
+    <a href="mp_ict_lab_syallbus.html" class="btn">View Syllabus</a>
+  </div>
+
+ 
+   
+        <div class="card" style="background: linear-gradient(45deg, #1e88e5, #00c853);">
+            <div class="icon">
+                <i class="fas fa-laptop-code"></i> <!-- Icon for Digital Course -->
+            </div>
+            <h3>Digital Productivity Course<h3>
+            <p>इस कोर्स में आप MS Word, Excel और PowerPoint जैसे डिजिटल टूल्स का उपयोग करके अपनी कार्यकुशलता को बढ़ा सकते हैं। यह कोर्स छात्रों के लिए डिजिटल कार्यकुशलता में सुधार लाने के लिए डिज़ाइन किया गया है।</p>
+            <a href="digital_prodictivy_courss.html" class="btn">Know More</a>
+        </div>
+        
+        
+        
+     <div class="card" style="background: linear-gradient(45deg, #fbc2eb, #a6c1ee);">
+    <i class="fas fa-file-alt"></i>
+    <h3>Digital Productivity Course Project </h3>
+    <p>विद्यार्थियों द्वारा इस कोर्स के अंतर्गत बनाए गए प्रोजेक्ट्स और 'डिजिटल ICT दर्पण' वार्षिक पत्रिका </p>
+    <a href="#" class="btn">Open</a>
+  </div>   
+        
+         <div class="card" style="background: linear-gradient(45deg, #89f7fe, #66a6ff);">
+    <i class="fas fa-video"></i>
+    <h3>YouTube वीडियो गैलरी</h3>
+    <p>डिजिटल क्लासेस और प्रोजेक्ट डेमो वीडियो का संग्रह।</p>
+    <a href="YouTube_video.html" class="btn">See Our Video</a>
+  </div>
+
+
+    <div class="card" style="background: linear-gradient(45deg, #8e24aa, #f06292);">
+        <div class="icon">
+            <i class="fas fa-image"></i> <!-- Icon for Gallery -->
+        </div>
+        <h3>ICT LAB Gallery</h3>
+        <p>हमारी ICT लैब की गतिविधियों, प्रोजेक्ट्स और स्कूल की तस्वीरों को देखने के लिए गैलरी पर क्लिक करें।</p>
+        <a href="ict_lab_gallery.html" class="btn">See Our Gallery </a>
+    </div>
+    
+        
+         <div class="card" style="background: linear-gradient(45deg, #ffecd2, #fcb69f);">
+    
+          <i class="fas fa-comments"></i>
+         
+    <h3>Feedback</h3>
+    <p>अपनी राय और सुझाव हमें जरूर भेजें।</p>
+    <a href="Feedback.html" class="btn">Give Your Suggestion</a>
+  </div>
+  </div>
+</section>
+ 
+
+
+
+
+
+
+
+  
+
+  <!-- Subject Progress Bars Section -->
+  <div class="section">
+    <h2><center>Student Subject Progress</center></h2>
+    <div class="progress">
+      <div class="ict">Computer Basic - 90%</div>
+    </div>
+    <div class="progress">
+      <div class="word">Word Processing - 85%</div>
+    </div>
+    <div class="progress">
+      <div class="excel">MS Excel - 75%</div>
+    </div>
+    <div class="progress">
+      <div class="ppt">MS PowerPoint - 80%</div>
+    </div>
+    <div class="progress">
+      <div class="internet">Html & Css - 50%</div>
+    </div>
+  </div>
+</div>
+<!--------------------image-------------------->
+<div class="gallery">
+
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (87).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+
+  <!-- Image 2 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (85).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+
+  <!-- Image 3 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (89).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+
+  <!-- Image 4 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (90).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+
+  <!-- Image 5 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (91).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+  <!-- Image 3 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (92).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+
+  <!-- Image 4 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (95).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+
+  <!-- Image 5 -->
+  <div class="gallery-item">
+    <img src="E:\ICT LAB WEBSITE CM RISE GARHAKOTA\Ict_website_image\ict1 (96).jpg" alt="ICT Image 1">
+    <div class="caption"></div>
+  </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+
+<!--------------------image-------------------->
+  <script>
+    function toggleMenu() {
+      var menu = document.querySelector('nav');
+      menu.classList.toggle('show');
+    }
+  </script>
+<!-- Google Translate -->
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'hi',  // डिफ़ॉल्ट भाषा (यहां हिंदी है)
+      includedLanguages: 'hi,en,es,fr,de',  // आप जिन भाषाओं का समर्थन करना चाहते हैं
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+      multilanguagePage: true
+    }, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+
+<!----------------------Footer Section----------------------->
+<footer>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="mp_ict_yojna.html">MP ICT LAB</a></li>
+        <li><a href="ict_intro_activity.html">ICT Lab Introduction</a></li>
+        <li><a href="mp_ict_lab_syallbus.html">ICT Lab Syllabus</a></li>
+        <li> <a href="Feedback.html">Contact Us</a></li>
+        <li><a href="about_author.html">About</a></li>
+      </ul>
+    </div>
+  
+    <div>
+      <h4>Contact Information</h4>
+      <p>Government CM Rise Sabulal School Garhakota</p>
+      <p>Address: School Campus, Garhakota, Madhya Pradesh, India</p>
+    </div>
+  
+  
+  
+    <div class="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1825.574071442908!2d79.13248303880454!3d23.77773844919807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3978b33f3818657f%3A0x8b4fad5c05e386c1!2sSabulal%20School!5e0!3m2!1sen!2sin!4v1744686989118!5m2!1sen!2sin" width="100%" height="200px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </footer>
+  
+  <button class="scroll-to-top" id="scrollToTopBtn" onclick="scrollToTop()">Back to Top</button>
+  
+  <div style="text-align: center; padding-top: 20px; color: #ddd; background-color: #171630;">
+    <p>&copy; <span id="currentYear"></span> Government CM Rise Sabulal School Garhakota. All Rights Reserved.</p>
+  </div>
+  
+  <!-- Font Awesome for Social Media Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <!-- Scroll to Top and Dynamic Year -->
+  <script>
+    // Scroll to Top Functionality
+    window.onscroll = function () {
+      let scrollBtn = document.getElementById("scrollToTopBtn");
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollBtn.style.display = "block";
+      } else {
+        scrollBtn.style.display = "none";
+      }
+    };
+  
+    function scrollToTop() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  
+    // Update current year dynamically
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+  </body>
+  </html>
+  
+  
+
+
+
+
